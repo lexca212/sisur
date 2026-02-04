@@ -1,0 +1,22 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\SuratMasukController;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard.index');
+    
+})->name('dashboard');
+
+Route::get('/inputsurat', function () {
+    return view('dashboard.inputsurat');
+    
+})->name('inputsurat');
+
+Route::get('/suratmasuk', [SuratMasukController::class, 'index'])->name('suratmasuk');
+Route::post('/simpansurat', [SuratMasukController::class, 'store'])->name('simpansurat');
