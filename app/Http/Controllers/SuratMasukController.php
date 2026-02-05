@@ -15,9 +15,11 @@ class SuratMasukController extends Controller
 
     public function store(Request $request)
     {
+        //dd('MASUK STORE');
+
         $request->validate([
             'nomor_surat'   => 'required|min:3',
-            'tanggal_surat' => 'required|date',
+            'tangal_surat' => 'required',
             'pengirim'      => 'required',
             'perihal'       => 'required',
             'tujuan'        => 'required',
@@ -30,11 +32,11 @@ class SuratMasukController extends Controller
         // Simpan ke Database
         SuratMasuk::create([
             'nomor_surat'   => $request->nomor_surat,
-            'tanggal_surat' => $request->tanggal_surat,
+            'tangal_surat' => $request->tangal_surat,
             'pengirim'      => $request->pengirim,
             'perihal'       => $request->perihal,
             'tujuan'        => $request->tujuan,
-            'file_surat'    => $path,
+            'file_surat'    => 'dummy.pdf',
         ]);
 
         return redirect()->back()->with('success','Surat masuk tersimpan');

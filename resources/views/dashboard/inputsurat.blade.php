@@ -9,6 +9,15 @@
        </div>
        <!-- /.card-header -->
        <!-- form start -->
+        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
        <form action="{{route('simpansurat')}}" method="POST" enctype="multipart/form-data">
         @csrf
            <div class="card-body">
@@ -18,7 +27,7 @@
                </div>
                <div class="form-group">
                    <label for="exampleInputPassword1">Tanggal Surat </label>
-                   <input type="date" name="tanggal_surat" class="form-control" id="exampleInputPassword1" placeholder="Tanggal Surat">
+                   <input type="date" name="tangal_surat" class="form-control" id="exampleInputPassword1" placeholder="Tanggal Surat">
                </div>
                <div class="form-group">
                    <label for="exampleInputPassword1">Pengirim </label>
