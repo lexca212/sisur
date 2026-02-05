@@ -7,11 +7,11 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Contoh DataTables</h3>
-
+           
         </div>
-        <div class=" card-header">
-            <a href="{{route('inputsurat')}}" class="btn btn-secondary">Input</a>
-        </div>
+         <div class=" card-header">
+                <a href="{{route('inputsurat')}}" class="btn btn-secondary">Input</a>
+            </div>
         <div class="card-body">
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
@@ -21,7 +21,6 @@
                         <th>Pengirim</th>
                         <th>Perihal</th>
                         <th>Tujuan</th>
-                        <th>Status</th>
                         <th>File</th>
                     </tr>
                 </thead>
@@ -33,15 +32,7 @@
                         <td>{{$d->pengirim}}</td>
                         <td>{{$d->perihal}}</td>
                         <td>{{$d->tujuan}}</td>
-                        <td>
-                            @if($d->stauts == 'baru')
-                                 <span class="badge badge-primary">Baru</span>
-                            @endif</td>
-                        <td>
-                            <a href="{{ asset('storage/'.$d->file_surat) }}" target="_blank">
-                                Lihat File
-                            </a>
-                        </td>
+                        <td>{{$d->file_surat}}</td>
                     </tr>
                     @empty
                     <div class="alert alert-danger">
@@ -72,26 +63,25 @@
 
 
 <script>
-    $(function() {
-        $("#example1").DataTable({
-            responsive: true,
-            autoWidth: false,
-            order: [
-                [0, "desc"]
-            ],
-            dom: "<'row mb-2'" +
+    $(function () {
+    $("#example1").DataTable({
+        responsive: true,
+        autoWidth: false,
+        order: [[0, "desc"]],
+        dom:
+            "<'row mb-2'" +
                 "<'col-sm-6'l>" +
                 "<'col-sm-6 text-right'f>" +
-                ">" +
-                "<'row'" +
+            ">" +
+            "<'row'" +
                 "<'col-sm-12'tr>" +
-                ">" +
-                "<'row mt-2'" +
+            ">" +
+            "<'row mt-2'" +
                 "<'col-sm-5'i>" +
                 "<'col-sm-7'p>" +
-                ">"
-        });
+            ">"
     });
+});
     $('#example2').DataTable({
         "paging": true,
         "lengthChange": false,
@@ -101,5 +91,6 @@
         "autoWidth": false,
         "responsive": true,
     });
+   
 </script>
 @endpush

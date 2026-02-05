@@ -23,6 +23,7 @@ class SuratMasukController extends Controller
             'pengirim'      => 'required',
             'perihal'       => 'required',
             'tujuan'        => 'required',
+            'stauts'        => '',
             'file_surat'    => 'required|file|mimes:jpg,png,pdf,jpeg|max:2048' // Diubah ke 10MB agar lebih aman
         ]);
 
@@ -36,7 +37,8 @@ class SuratMasukController extends Controller
             'pengirim'      => $request->pengirim,
             'perihal'       => $request->perihal,
             'tujuan'        => $request->tujuan,
-            'file_surat'    => 'dummy.pdf',
+            'stauts'        => 'baru',
+            'file_surat'    => $path,
         ]);
 
         return redirect()->back()->with('success','Surat masuk tersimpan');
