@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SuratMasuk;
+use Illuminate\Http\RedirectResponse;
 
 class SuratMasukController extends Controller
 {
@@ -13,7 +14,7 @@ class SuratMasukController extends Controller
         return view('dashboard.suratmasuk', compact('datasurat'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         //dd('MASUK STORE');
 
@@ -41,7 +42,7 @@ class SuratMasukController extends Controller
             'file_surat'    => $path,
         ]);
 
-        return redirect()->back()->with('success','Surat masuk tersimpan');
+        return redirect()->route('suratmasuk')->with(['success' => 'Surat masuk tersimpan']);
     }
 
     public function edit($id)
