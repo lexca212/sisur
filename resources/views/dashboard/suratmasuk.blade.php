@@ -36,7 +36,10 @@
                         <td>
                             @if($d->stauts == 'baru')
                                  <span class="badge badge-primary">Baru</span>
-                            @endif</td>
+                            @elseif($d->stauts == 'proses')
+                                <span class="badge badge-secondary">Proses</span>
+                            @endif
+                        </td>
                         <td>
                             <a href="{{ asset('storage/'.$d->file_surat) }}" target="_blank">
                                 Lihat File
