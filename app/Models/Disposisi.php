@@ -7,4 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Disposisi extends Model
 {
     //
+
+    protected $table = 'disposisi';
 }

@@ -25,7 +25,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($datasurat as $d)
+                    @forelse ($disposisi as $d)
                     <tr>
                         <td>{{$d->tangal_surat}}</td>
                         <td>{{$d->nomor_surat}}</td>

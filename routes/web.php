@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DisposisiMasukController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\SuratMasukController;
@@ -20,3 +21,4 @@ Route::get('/inputsurat', function () {
 
 Route::get('/suratmasuk', [SuratMasukController::class, 'index'])->name('suratmasuk');
 Route::post('/simpansurat', [SuratMasukController::class, 'store'])->name('simpansurat');
+Route::get('/disposisimasuk', [DisposisiMasukController::class, 'index'])->name('disposisimasuk');
