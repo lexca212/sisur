@@ -43,4 +43,13 @@ class SuratMasukController extends Controller
 
         return redirect()->back()->with('success','Surat masuk tersimpan');
     }
+
+    public function edit($id)
+    {
+        //
+
+        $datasurat = SuratMasuk::FindOrFail($id);
+
+        return view('suratmasuk.edit', compact('datasurat'));
+    }
 } // Pastikan kurung ini ada

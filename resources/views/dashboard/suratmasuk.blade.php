@@ -23,6 +23,7 @@
                         <th>Tujuan</th>
                         <th>Status</th>
                         <th>File</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,15 +36,23 @@
                         <td>{{$d->tujuan}}</td>
                         <td>
                             @if($d->stauts == 'baru')
-                                 <span class="badge badge-primary">Baru</span>
+                            <span class="badge badge-primary">Baru</span>
                             @elseif($d->stauts == 'proses')
-                                <span class="badge badge-secondary">Proses</span>
+                            <span class="badge badge-secondary">Proses</span>
                             @endif
                         </td>
                         <td>
                             <a href="{{ asset('storage/'.$d->file_surat) }}" target="_blank">
                                 Lihat File
                             </a>
+                        </td>
+                        <td>
+                            <form action="post" method="POST">
+                                @csrf
+                                <a href='#' class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
+                                <a href='#' class="btn btn-secondary btn-sm">Hapus</a>
+                                <a href='#' class="btn btn-danger btn-sm">Hapus</a>
+                            </form>
                         </td>
                     </tr>
                     @empty
