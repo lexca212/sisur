@@ -6,7 +6,7 @@
 <div class="container-fluid">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Contoh DataTables</h3>
+            <h3 class="card-title">Data Surat</h3>
 
         </div>
         <div class=" card-header">
