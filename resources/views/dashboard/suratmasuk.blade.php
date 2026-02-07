@@ -50,13 +50,12 @@
                         </td>
                         <td>
                             <form action="post" method="POST">
-                                <button type="button" class="btn btn-default btn-disposisi" data-toggle="modal" data-target="#modal-default" data-nomor="{{ $d->nomor_surat }}">
-                                   Disposisi
+                                <button type="button" class="btn btn-primary btn-sm btn-disposisi" data-toggle="modal" data-target="#modal-default" data-nomor="{{ $d->nomor_surat }}" data-id="{{$d->id}}">
+                                  <i class="fa fa-paper-plane"></i>
                                 </button>
                                 @csrf
-                                <a href='#' class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
-                                <a href='#' class="btn btn-secondary btn-sm">Hapus</a>
-                                <a href='#' class="btn btn-danger btn-sm">Hapus</a>
+                                <a href='#' class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                <a href='#' class="btn btn-success btn-sm"><i class="fa fa-pen"></i></a>
                             </form>
                         </td>
                     </tr>
@@ -86,45 +85,47 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form action="{{ route('simpandisposisi') }}" method="POST">
+                @csrf
                 <div class="card-body">
                   <div class="form-group">
+                    <input type="hidden" name="surat_masuk_id" id="surat_id_modal">
                     <label for="exampleInputEmail1">Nomor Surat</label>
                     <input type="text" class="form-control" id="nomor_surat_modal" placeholder="" readonly>
                   </div>
+                  <!-- sementara -->
+                   <div class="form-group">
+                    <label for="exampleInputPassword1">Dari Ke</label>
+                    <input type="text" class="form-control" name="dari_user_id" id="" placeholder="">
+                  </div>
+                   <!-- end sementara -->
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <label for="exampleInputPassword1">Ditujukan Ke</label>
+                    <input type="text" class="form-control" name="ke_user_id" id="" placeholder="">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text">Upload</span>
-                      </div>
-                    </div>
+                    <label for="exampleInputPassword1">isi disposisi</label>
+                    <!-- <input type="text" class="form-control" name="isi_disposisi" id="" placeholder=""> -->
+                    <textarea name="isi_disposisi" class="form-control" id=""></textarea>
                   </div>
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Batas Waktu</label>
+                    <input type="date" class="form-control" name="batas_waktu" id="" placeholder="">
                   </div>
                 </div>
                 <!-- /.card-body -->
 
-                <div class="card-footer">
+                {{-- <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-              </form>
+                </div> --}}
+             
             </div>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+              <button type="submit" class="btn btn-primary">Save changes</button> 
             </div>
+            </form>
           </div>
           <!-- /.modal-content -->
         </div>
@@ -185,7 +186,9 @@
 <script>
 $(document).on('click', '.btn-disposisi', function () {
     let nomorSurat = $(this).data('nomor');
+    let idSurat = $(this).data('id');
     $('#nomor_surat_modal').val(nomorSurat);
+    $('#surat_id_modal').val(idSurat);
 });
 </script>
 

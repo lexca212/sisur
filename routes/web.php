@@ -22,3 +22,4 @@ Route::get('/inputsurat', function () {
 Route::get('/suratmasuk', [SuratMasukController::class, 'index'])->name('suratmasuk');
 Route::post('/simpansurat', [SuratMasukController::class, 'store'])->name('simpansurat');
 Route::get('/disposisimasuk', [DisposisiMasukController::class, 'index'])->name('disposisimasuk');
+Route::post('/simpandisposisi', [DisposisiMasukController::class, 'store'])->name('simpandisposisi');
