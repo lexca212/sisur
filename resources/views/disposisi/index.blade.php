@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'DataTables')
+@section('title', 'Disposisi')
 
 @section('content')
 <div class="container-fluid">
@@ -16,23 +16,29 @@
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Tanggal</th>
-                        <th>Nomor Surat</th>
+                        <th>Tanggal Disposisi</th>
+                        <th>Tanggal Surat</th>
                         <th>Pengirim</th>
                         <th>Perihal</th>
-                        <th>Tujuan</th>
+                        <th>Isi Disposisi</th>
+                        <th>Status</th>
                         <th>File</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($disposisi as $d)
                     <tr>
-                        <td>{{$d->tangal_surat}}</td>
-                        <td>{{$d->nomor_surat}}</td>
-                        <td>{{$d->pengirim}}</td>
-                        <td>{{$d->perihal}}</td>
-                        <td>{{$d->tujuan}}</td>
-                        <td>{{$d->file_surat}}</td>
+                        <td>{{$d->created_at}}</td>
+                        <td>{{$d->suratMasuk->tangal_surat}}</td>
+                        <td>{{$d->suratMasuk->pengirim}}</td>
+                        <td>{{$d->suratMasuk->perihal}}</td>
+                        <td>{{$d->isi_disposisi}}</td>
+                        <td>{{$d->status}}</td>
+                        <td>
+                            <a href="{{ asset('storage/'.$d->suratMasuk->file_surat) }}" class="btn btn-sm btn-warning" target="_blank">
+                                Lihat File
+                            </a>
+                        </td>
                     </tr>
                     @empty
                     <div class="alert alert-danger">

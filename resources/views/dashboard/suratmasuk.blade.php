@@ -39,8 +39,8 @@
                         <td>
                             @if($d->stauts == 'baru')
                             <span class="badge badge-primary">Baru</span>
-                            @elseif($d->stauts == 'proses')
-                            <span class="badge badge-secondary">Proses</span>
+                            @elseif($d->stauts == 'disposisi')
+                            <span class="badge badge-secondary">Disposisi</span>
                             @endif
                         </td>
                         <td>

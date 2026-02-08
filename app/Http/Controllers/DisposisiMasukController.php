@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Disposisi;
+use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectRespone;
+use Illuminate\Support\Facades\DB;
 
 class DisposisiMasukController extends Controller
 {
@@ -12,7 +14,13 @@ class DisposisiMasukController extends Controller
 
     public function index()
     {
-        $disposisi = Disposisi::all();
+        // $disposisi = Disposisi::all();
+
+        $disposisi = Disposisi::with([
+            'suratMasuk',
+            'dari',
+            'ke'
+        ])->latest()->get();
         return view('disposisi.index', compact('disposisi'));
     }
 
@@ -27,6 +35,8 @@ class DisposisiMasukController extends Controller
 
         ]);
 
+        DB::transaction(function () use ($request) {
+
         Disposisi::create([
             'surat_masuk_id'   => $request->surat_masuk_id,
             'dari_user_id'     => $request->dari_user_id,
@@ -34,6 +44,12 @@ class DisposisiMasukController extends Controller
             'isi_disposisi'    => $request->isi_disposisi,
             'batas_waktu'      => $request->batas_waktu,
         ]);
+
+         SuratMasuk::where('id', $request->surat_masuk_id)
+                ->update([
+                    'stauts' => 'disposisi'
+                ]);
+            });
          return redirect()->route('suratmasuk')->with(['success' => 'Surat masuk tersimpan']);
     }
 }
