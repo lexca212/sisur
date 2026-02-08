@@ -5,12 +5,12 @@ use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\SuratMasukController;
 
-Route::get('/login', function(){
-    return view('auth.login');
-});
+// Route::get('/login', function(){
+//     return view('auth.login');
+// });
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('login', [AuthController::class, 'authenticate'])->name('login.post');
+Route::post('/login', [AuthController::class, 'authenticate'])->name('login.post');
 
 Route::get('/', function () {
     return view('welcome');
