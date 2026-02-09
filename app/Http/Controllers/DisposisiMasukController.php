@@ -4,25 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Models\Disposisi;
 use App\Models\SuratMasuk;
+//use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectRespone;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class DisposisiMasukController extends Controller
 {
     //
 
-    public function index()
-    {
-        // $disposisi = Disposisi::all();
+   public function index()
+{
+    $user = Auth::user();
 
-        $disposisi = Disposisi::with([
-            'suratMasuk',
-            'dari',
-            'ke'
-        ])->latest()->get();
-        return view('disposisi.index', compact('disposisi'));
+    $query = Disposisi::with(['suratMasuk', 'dari', 'ke'])->latest();
+
+    if (!in_array($user->role, ['direktur', 'tu'])) {
+        $query->where('ke_user_id', $user->id);
     }
+
+    $disposisi = $query->get();
+
+    return view('disposisi.index', compact('disposisi'));
+}
+
 
     public function store(Request $request)
     {

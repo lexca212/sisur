@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SuratMasuk;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 
 class SuratMasukController extends Controller
@@ -11,7 +12,8 @@ class SuratMasukController extends Controller
     public function index()
     {
         $datasurat = SuratMasuk::all();
-        return view('dashboard.suratmasuk', compact('datasurat'));
+        $users = User::orderBy('name')->get();
+        return view('dashboard.suratmasuk', compact('datasurat','users'));
     }
 
     public function store(Request $request): RedirectResponse

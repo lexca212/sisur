@@ -73,7 +73,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Default Modal</h4>
+              <h4 class="modal-title"></h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -81,7 +81,7 @@
             <div class="modal-body">
            <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Quick Example</h3>
+                <h3 class="card-title">Form Disposisi</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -95,13 +95,19 @@
                   </div>
                   <!-- sementara -->
                    <div class="form-group">
-                    <label for="exampleInputPassword1">Dari Ke</label>
-                    <input type="text" class="form-control" name="dari_user_id" id="" placeholder="">
+                    <label for="exampleInputPassword1">Dari</label>
+                    <input type="text" class="form-control" value="{{Auth::user()->name}}" readonly>
+                    <input type="hidden" class="form-control" name="dari_user_id" value="{{Auth::user()->id}}" placeholder="{{Auth::user()->name}}" readonly>
                   </div>
                    <!-- end sementara -->
                   <div class="form-group">
                     <label for="exampleInputPassword1">Ditujukan Ke</label>
-                    <input type="text" class="form-control" name="ke_user_id" id="" placeholder="">
+                    <select class="form-control" name="ke_user_id" id="">
+                      @foreach($users as $u)
+                      <option value="{{$u->id}}">{{$u->name}}</option>
+                      @endforeach
+                    </select>
+                    <!-- <input type="text" class="form-control" name="ke_user_id" id="" placeholder=""> -->
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">isi disposisi</label>
