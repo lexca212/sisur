@@ -61,7 +61,7 @@
             <a href="#" class="nav-link bg-success">Master Data</a>
           </li>
           <li class="nav-item">
-            <a href="{{route('dashboard')}}" class="nav-link">
+            <a href="{{route('users.index')}}" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 User

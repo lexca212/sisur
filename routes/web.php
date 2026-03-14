@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 // Route::get('/login', function(){
 //     return view('auth.login');
@@ -39,3 +40,19 @@ Route::post('/simpansurat', [SuratMasukController::class, 'store'])->name('simpa
 Route::post('/simpandisposisi', [DisposisiMasukController::class, 'store'])->name('simpandisposisi');
 });
 Route::get('/disposisimasuk', [DisposisiMasukController::class, 'index'])->name('disposisimasuk');
+
+Route::middleware(['auth','role:direktur,tu'])->group(function(){
+
+    Route::get('/users', [UserController::class,'index'])->name('users.index');
+
+    Route::get('/users/create', [UserController::class,'create'])->name('users.create');
+
+    Route::post('/users', [UserController::class,'store'])->name('users.store');
+
+    Route::get('/users/{id}/edit', [UserController::class,'edit'])->name('users.edit');
+
+    Route::put('/users/{id}', [UserController::class,'update'])->name('users.update');
+
+    Route::delete('/users/{id}', [UserController::class,'destroy'])->name('users.destroy');
+
+});
