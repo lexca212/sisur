@@ -42,9 +42,11 @@ Route::middleware(['auth'])->group(function (){
         Route::put('/suratmasuk/{id}', [SuratMasukController::class, 'update'])->name('updatesurat');
 
         Route::delete('/suratmasuk/{id}', [SuratMasukController::class, 'destroy'])->name('hapussurat');
+
+        Route::post('/simpandisposisi', [DisposisiMasukController::class, 'store'])->name('simpandisposisi');
     });
 
-    Route::post('/simpandisposisi', [DisposisiMasukController::class, 'store'])->name('simpandisposisi');
+    
 });
 
 Route::get('/disposisimasuk', [DisposisiMasukController::class, 'index'])->name('disposisimasuk');
