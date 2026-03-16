@@ -56,7 +56,9 @@
         
           </li>
           <hr>
-          
+          @auth
+
+          @if (auth()->user()->role == 'tu')
           <li class="nav-item menu-open">
             <a href="#" class="nav-link bg-success">Master Data</a>
           </li>
@@ -77,6 +79,8 @@
                <p>Data instansi</p>
             </a>
           </li>
+          @endif
+          @endauth
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
