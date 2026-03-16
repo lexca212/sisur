@@ -6,6 +6,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\InstansiController;
 
 // Route::get('/login', function(){
 //     return view('auth.login');
@@ -62,4 +63,8 @@ Route::middleware(['auth','role:tu'])->group(function(){
 
     Route::delete('/users/{id}', [UserController::class,'destroy'])->name('users.destroy');
 
+});
+
+Route::middleware(['auth', 'role:tu'])->group(function(){
+    Route::resource('instansi', InstansiController::class);
 });
