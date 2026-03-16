@@ -1,8 +1,8 @@
  <aside class="main-sidebar sidebar-dark-primary bg-navy elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="-" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <img src="adminlte/dist/img/rsfc-logo.jpg" alt="-" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">SISUR RSFC</span>
     </a>
 
     <!-- Sidebar -->
