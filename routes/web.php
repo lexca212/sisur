@@ -16,32 +16,39 @@ Route::post('/login', [AuthController::class, 'authenticate'])->name('login.post
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function (){
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::middleware(['role:direktur,tu'])->group(function(){
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-})->name('dashboard');
-    
-});
-Route::middleware(['role:direktur,tu'])->group(function(){
-Route::get('/inputsurat', function () {
-    return view('dashboard.inputsurat');
-    
-})->name('inputsurat');
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
+    Route::middleware(['role:direktur,tu'])->group(function(){
+        Route::get('/dashboard', function () {
+            return view('dashboard.index');
+        })->name('dashboard');
+    });
 
-Route::get('/suratmasuk', [SuratMasukController::class, 'index'])->name('suratmasuk');
+    Route::middleware(['role:direktur,tu'])->group(function(){
+        Route::get('/inputsurat', function () {
+            return view('dashboard.inputsurat');
+            
+        })->name('inputsurat');
 
-Route::post('/simpansurat', [SuratMasukController::class, 'store'])->name('simpansurat');
+        Route::get('/suratmasuk', [SuratMasukController::class, 'index'])->name('suratmasuk');
+
+        Route::post('/simpansurat', [SuratMasukController::class, 'store'])->name('simpansurat');
+
+        Route::get('/suratmasuk/{id}/edit', [SuratMasukController::class, 'edit'])->name('editsurat');
+
+        Route::put('/suratmasuk/{id}', [SuratMasukController::class, 'update'])->name('updatesurat');
+
+        Route::delete('/suratmasuk/{id}', [SuratMasukController::class, 'destroy'])->name('hapussurat');
+    });
+
+    Route::post('/simpandisposisi', [DisposisiMasukController::class, 'store'])->name('simpandisposisi');
 });
 
-Route::post('/simpandisposisi', [DisposisiMasukController::class, 'store'])->name('simpandisposisi');
-});
 Route::get('/disposisimasuk', [DisposisiMasukController::class, 'index'])->name('disposisimasuk');
 
-Route::middleware(['auth','role:direktur,tu'])->group(function(){
+Route::middleware(['auth','role:tu'])->group(function(){
 
     Route::get('/users', [UserController::class,'index'])->name('users.index');
 

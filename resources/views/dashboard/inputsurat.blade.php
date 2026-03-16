@@ -69,3 +69,15 @@
 
    <!-- general form elements -->
    @endsection
+
+   @push('js')
+    @if ($errors->any())
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Validasi gagal',
+                html: `{!! implode('<br>', $errors->all()) !!}`
+            })
+        </script>
+    @endif
+@endpush
