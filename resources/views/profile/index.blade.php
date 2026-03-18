@@ -52,10 +52,42 @@
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-save mr-1"></i> Simpan Perubahan
                     </button>
+                    
+                    @if($profile->chat_id)
+                        <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#modal-delete">
+                            <i class="fas fa-trash"></i> Hapus
+                        </button>
+                    @endif
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+@if($profile->chat_id)
+<div class="modal fade" id="modal-delete">
+    <div class="modal-dialog">
+        <div class="modal-content text-dark">
+            <div class="modal-header bg-danger">
+                <h4 class="modal-title">Konfirmasi Hapus</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin menghapus Chat ID <strong>{{ $profile->chat_id }}</strong>?</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                <form action="{{ route('profile.destroy', $profile->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Ya, Hapus Sekarang</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 
 @endsection

@@ -28,7 +28,7 @@
 
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="chat_id">Chat ID (Telegram)</label>
+                        <label for="chat_id">Bot ID (Telegram)</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-comment-dots"></i></span>

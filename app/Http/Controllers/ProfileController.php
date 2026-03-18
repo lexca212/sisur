@@ -29,4 +29,15 @@ class ProfileController extends Controller
 
         return redirect()->back()->with('success', 'Chat ID berhasil disimpan!');
     }
+
+    public function destroy()
+    {
+        $user = Auth::user();
+
+        $user->update([
+            'chat_id' => null
+        ]);
+
+        return redirect()->back()->with('success', 'Chat ID berhasil dihapus!');
+    }
 }

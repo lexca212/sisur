@@ -82,4 +82,5 @@ Route::middleware(['auth', 'role:tu'])->group(function(){
 Route::middleware(['auth'])->group(function(){
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('/profile', [ProfileController::class, 'store'])->name('profile.store');
+    Route::delete('/profile/{id}', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
