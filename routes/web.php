@@ -7,6 +7,8 @@ use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InstansiController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingController;
 
 // Route::get('/login', function(){
 //     return view('auth.login');
@@ -69,4 +71,15 @@ Route::middleware(['auth','role:tu'])->group(function(){
 
 Route::middleware(['auth', 'role:tu'])->group(function(){
     Route::resource('instansi', InstansiController::class);
+});
+
+Route::middleware(['auth', 'role:tu'])->group(function(){
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::post('/settings', [SettingController::class, 'store'])->name('settings.store');
+    Route::delete('/settings/{setting}', [SettingController::class, 'destroy'])->name('settings.destroy');
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/profile', [ProfileController::class, 'store'])->name('profile.store');
 });

@@ -13,7 +13,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{Auth::user()->name}}</a>
+          <a href="{{ route('profile.index') }}" class="d-block">{{Auth::user()->name}}</a>
         </div>
       </div>
 
@@ -77,6 +77,14 @@
                
               </i>
                <p>Data instansi</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('settings.index')}}" class="nav-link">
+              <i class="nav-icon fa fa-cog">
+               
+              </i>
+               <p>Settings</p>
             </a>
           </li>
           @endif

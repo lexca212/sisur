@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Disposisi;
 use App\Models\SuratMasuk;
+use App\Models\User;
+use App\Models\Setting;
+use Illuminate\Support\Facades\Http;
 //use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectRespone;
@@ -43,19 +46,47 @@ class DisposisiMasukController extends Controller
 
         DB::transaction(function () use ($request) {
 
-        Disposisi::create([
-            'surat_masuk_id'   => $request->surat_masuk_id,
-            'dari_user_id'     => $request->dari_user_id,
-            'ke_user_id'       => $request->ke_user_id,
-            'isi_disposisi'    => $request->isi_disposisi,
-            'batas_waktu'      => $request->batas_waktu,
-        ]);
+            Disposisi::create([
+                'surat_masuk_id'   => $request->surat_masuk_id,
+                'dari_user_id'     => $request->dari_user_id,
+                'ke_user_id'       => $request->ke_user_id,
+                'isi_disposisi'    => $request->isi_disposisi,
+                'batas_waktu'      => $request->batas_waktu,
+            ]);
 
-         SuratMasuk::where('id', $request->surat_masuk_id)
-                ->update([
-                    'stauts' => 'disposisi'
-                ]);
-            });
-         return redirect()->route('suratmasuk')->with(['success' => 'Surat masuk tersimpan']);
+            SuratMasuk::where('id', $request->surat_masuk_id)
+                    ->update([
+                        'stauts' => 'disposisi'
+                    ]);
+        });
+
+        $penerima = User::find($request->ke_user_id);
+
+        if ($penerima && $penerima->chat_id) {
+            $this->sendTelegramNotification($penerima->chat_id, $request->isi_disposisi, $request->batas_waktu);
+        }
+        
+        return redirect()->route('suratmasuk')->with(['success' => 'Surat masuk tersimpan']);
+    }
+
+    private function sendTelegramNotification($chat_id, $pesan_disposisi, $batas_waktu)
+    {
+        $setting = Setting::first();
+
+        // dd($setting->chat_id);
+
+        if ($setting->chat_id) {
+            $message = "📂 *DISPOSISI MASUK* 📂\n\n";
+            $message .= "Halo, Anda menerima disposisi baru:\n\n";
+            $message .= "💬 _\"" . $pesan_disposisi . "\"_ \n\n";
+            $message .= "Batas waktu disposisi:" . $batas_waktu . "\n";
+            $message .= "Silakan cek sistem untuk detail lebih lanjut.";
+
+            Http::post("https://api.telegram.org/bot{$setting->chat_id}/sendMessage", [
+                'chat_id' => $chat_id,
+                'text' => $message,
+                'parse_mode' => 'Markdown',
+            ]);
+        }
     }
 }
