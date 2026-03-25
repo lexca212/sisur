@@ -52,6 +52,8 @@ Route::middleware(['auth'])->group(function (){
 
 Route::get('/disposisimasuk', [DisposisiMasukController::class, 'index'])->name('disposisimasuk');
 
+Route::put('/disposisi/{id}/status', [DisposisiMasukController::class, 'updateStatus'])->name('disposisi.updateStatus');
+
 Route::middleware(['auth','role:tu'])->group(function(){
 
     Route::get('/users', [UserController::class,'index'])->name('users.index');

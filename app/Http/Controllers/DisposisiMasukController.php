@@ -69,6 +69,19 @@ class DisposisiMasukController extends Controller
         return redirect()->route('suratmasuk')->with(['success' => 'Surat masuk tersimpan']);
     }
 
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:menunggu,diproses,selesai'
+        ]);
+
+        $disposisi = Disposisi::findOrFail($id);
+        $disposisi->status = $request->status;
+        $disposisi->save();
+
+        return redirect()->back()->with('success', 'Status disposisi berhasil diperbarui!');
+    }
+
     private function sendTelegramNotification($chat_id, $pesan_disposisi, $batas_waktu)
     {
         $setting = Setting::first();
