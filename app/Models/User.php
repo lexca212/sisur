@@ -35,6 +35,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function ke()
+    {
+        return $this->hasMany(Disposisi::class, 'ke_user_id');
+    }
+
     /**
      * Get the attributes that should be cast.
      *
