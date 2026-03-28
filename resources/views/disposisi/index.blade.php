@@ -38,7 +38,7 @@
                                         <span class="badge" style="background-color: #007bff; color: white;">Diproses</span>
                                     @else
                                         <span class="badge" style="background-color: #28a745; color: white;">Selesai</span>
-                                    @endif0
+                                    @endif
                                 </td>
                                 <td>
                                     <div class="btn-group">
